@@ -9,23 +9,28 @@ buildscript {
     dependencies {
         classpath 'org.openjfx:javafx-plugin:0.0.8'
         classpath 'gradle.plugin.org.beryx:badass-runtime-plugin:1.2.0'
+        classpath "net.ltgt.gradle:gradle-apt-plugin:0.21"
     }
 
-        repositories {
-            maven {
+    repositories {
+        maven {
                 url "https://plugins.gradle.org/m2/"
             }
         }
-        dependencies {
+
+     dependencies {
             classpath "org.openjfx:javafx-plugin:0.0.8"
         }
 }
 
 apply plugin: 'org.openjfx.javafxplugin'
 apply plugin: 'org.beryx.runtime'
+apply plugin: 'java'
+apply plugin: "net.ltgt.apt-idea"
+apply plugin: 'idea'
 
 project.ext {
-    daggerVersion = '2.23.0'
+    daggerVersion = '2.25.2'
     lombokVersion= '1.18.8'
     installerConfigTokens = [:]
 }
@@ -56,10 +61,11 @@ dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     implementation 'com.google.guava:guava:26.0-jre'
     compile "com.google.dagger:dagger:$daggerVersion"
-    compile 'com.jetbrains:annotations:15.0'
+    compile 'org.jetbrains:annotations:16.0.1'
+    compile "org.projectlombok:lombok:$lombokVersion"
 
-    annotationProcessor= "com.google.dagger:dagger-compiler:$daggerVersion"
-    annotationProcessor= "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$daggerVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
     testImplementation "org.projectlombok:lombok:$lombokVersion"
