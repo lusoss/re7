@@ -3,12 +3,17 @@
  */
 package io.luso;
 
-public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+public class App extends Application {
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        StackPane stackPane = new StackPane();
+        primaryStage.setScene(new Scene(stackPane, 1024,768));
+        primaryStage.show();
     }
 }
