@@ -13,7 +13,8 @@ public class App extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         StackPane stackPane = new StackPane();
-        primaryStage.setScene(new Scene(stackPane, 1024,768));
+        final Scene scene = new Scene(stackPane, 1024,768);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 }
