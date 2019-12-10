@@ -4,6 +4,7 @@
 .settings
 .gradle/
 .idea/
+bin/
 
 
 # Ignore Gradle build output directory
