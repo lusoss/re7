@@ -6,8 +6,20 @@
 package io.luso.ui.di;
 
 import dagger.Module;
+import dagger.Provides;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+
+import javax.inject.Singleton;
 
 @Module
 public class AppUiModule {
-    
+
+    @Provides
+    @Singleton
+    public Scene providesScene(){
+        StackPane stackPane = new StackPane();
+        final Scene scene = new Scene(stackPane, 1920,1080);
+        return scene;
+    }
 }
