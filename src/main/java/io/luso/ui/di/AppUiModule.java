@@ -5,7 +5,9 @@
  */
 package io.luso.ui.di;
 
+import dagger.Module;
 
+@Module
 public class AppUiModule {
     
 }
