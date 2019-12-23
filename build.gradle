@@ -14,24 +14,27 @@ buildscript {
 
     repositories {
         maven {
-                url "https://plugins.gradle.org/m2/"
-            }
+            url "https://plugins.gradle.org/m2/"
         }
+    }
 
-     dependencies {
-            classpath "org.openjfx:javafx-plugin:0.0.8"
-        }
+    dependencies {
+        classpath "org.openjfx:javafx-plugin:0.0.8"
+    }
 }
 
 apply plugin: 'org.openjfx.javafxplugin'
 apply plugin: 'org.beryx.runtime'
 apply plugin: 'java'
+apply plugin: 'application'
 apply plugin: "net.ltgt.apt-idea"
 apply plugin: 'idea'
 
+sourceCompatibility = 11
+
 project.ext {
     daggerVersion = '2.25.2'
-    lombokVersion= '1.18.8'
+    lombokVersion = '1.18.8'
     installerConfigTokens = [:]
 }
 

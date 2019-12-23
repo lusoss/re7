@@ -19,7 +19,6 @@ public class AppUiModule {
     @Singleton
     public Scene providesScene(){
         StackPane stackPane = new StackPane();
-        final Scene scene = new Scene(stackPane, 1920,1080);
-        return scene;
+        return new Scene(stackPane, 1920,1080);
     }
 }
