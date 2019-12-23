@@ -10,6 +10,5 @@ public class RecipeTest {
 
     @Before
     public void setUp() throws Exception {
-        recipe = new Recipe();
     }
 }

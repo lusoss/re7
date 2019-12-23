@@ -10,6 +10,7 @@ buildscript {
         classpath 'org.openjfx:javafx-plugin:0.0.8'
         classpath 'gradle.plugin.org.beryx:badass-runtime-plugin:1.2.0'
         classpath "net.ltgt.gradle:gradle-apt-plugin:0.21"
+        classpath "com.github.jengelman.gradle.plugins:shadow:5.1.0"
     }
 
     repositories {
@@ -29,6 +30,7 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: "net.ltgt.apt-idea"
 apply plugin: 'idea'
+apply plugin: "com.github.johnrengelman.shadow"
 
 sourceCompatibility = 11
 
@@ -39,17 +41,17 @@ project.ext {
 }
 
 repositories {
-    // Use jcenter for resolving your dependencies.
-    // You can declare any Maven/Ivy/file repository here.
     jcenter()
     mavenCentral()
     google()
 }
 
 application {
-    mainClassName = 'io.luso.App'
+    mainClassName = 'io.luso.Main'
     applicationDefaultJvmArgs = ['-Dprism.allowhidpi=false, -Dprism.verbose=true']
+    applicationName = 'Re7'
 }
+
 
 javafx {
     version = "11.0.1"
@@ -60,6 +62,34 @@ test {
     useJUnitPlatform()
 }
 
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-parameters"
+}
+
+installShadowDist {
+    distributions {
+        contents {
+            into('data') {
+                from '../data'
+            }
+        }
+    }
+}
+
+shadowJar {
+    mergeServiceFiles() {
+        exclude 'META-INF/services/org.xmlpull.v1.XmlPullParserFactory'
+    }
+
+    append 'META-INF/spring.factories'
+    append 'META-INF/spring.handlers'
+    append 'META-INF/spring.schemas'
+    append 'META-INF/spring.tooling'
+}
+
+runtime{
+    options=['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+}
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
     implementation 'com.google.guava:guava:26.0-jre'
