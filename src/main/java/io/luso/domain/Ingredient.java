@@ -1,10 +1,11 @@
 package io.luso.domain;
 
-public interface Ingredient {
+import lombok.Builder;
 
-    String getName();
+@Builder
+public class Ingredient {
 
-    Integer getQuantity();
-
-    UnitOfVolume getUnitOfVolume();
+    private String name;
+    private int quantity;
+    private UnitOfVolume unitOfVolume;
 }
