@@ -1,12 +1,17 @@
 package io.luso.domain;
 
-import org.junit.Before;
+import org.junit.Test;
+
+import java.util.List;
 
 public class RecipeTest {
 
     private Recipe recipe;
 
-    @Before
-    public void setUp() throws Exception {
+    @Test
+    public void testBuilder() {
+        Ingredient milk = Ingredient.builder().name("milk").quantity(125).unitOfVolume(UnitOfVolume.MILLILITRES).build();
+        Recipe recipe = Recipe.builder().ingredientList(List.of(milk)).title("Pain doré").build();
+        System.out.println("recipe = " + recipe);
     }
 }
