@@ -8,8 +8,10 @@ package io.luso.ui.di;
 import dagger.Module;
 import dagger.Provides;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 @Module
@@ -17,8 +19,17 @@ public class AppUiModule {
 
     @Provides
     @Singleton
-    public Scene providesScene(){
+    @Named("pane")
+    public Pane providesPane() {
+        return new Pane();
+    }
+
+    @Provides
+    @Singleton
+    public Scene providesScene(@Named("pane") Pane pane) {
         StackPane stackPane = new StackPane();
-        return new Scene(stackPane, 1920,1080);
+        pane.setStyle("-fx-background-color:blue");
+        stackPane.getChildren().add(pane);
+        return new Scene(stackPane, 1920, 1080);
     }
 }
