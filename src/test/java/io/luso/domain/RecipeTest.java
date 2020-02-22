@@ -6,8 +6,6 @@ import java.util.List;
 
 public class RecipeTest {
 
-    private Recipe recipe;
-
     @Test
     public void testBuilder() {
         Ingredient milk = Ingredient.builder()
